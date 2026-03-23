@@ -1,0 +1,13 @@
+model_list:
+  - model_name: cheap-fast-model
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+      api_key: AIzaSyCPdY7ide5JSzXwl3enCbYaCZIPipCW-Bc
+
+  - model_name: complex-reasoning-model
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+      api_key: AIzaSyCPdY7ide5JSzXwl3enCbYaCZIPipCW-Bc
+
+litellm_settings:
+  drop_params: true

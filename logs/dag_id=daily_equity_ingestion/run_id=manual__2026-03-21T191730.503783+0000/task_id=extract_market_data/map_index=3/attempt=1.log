@@ -1,0 +1,115 @@
+[2026-03-21T19:17:34.125+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: daily_equity_ingestion.extract_market_data manual__2026-03-21T19:17:30.503783+00:00 map_index=3 [queued]>
+[2026-03-21T19:17:34.132+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: daily_equity_ingestion.extract_market_data manual__2026-03-21T19:17:30.503783+00:00 map_index=3 [queued]>
+[2026-03-21T19:17:34.132+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2026-03-21T19:17:34.141+0000] {taskinstance.py:2191} INFO - Executing <Mapped(_PythonDecoratedOperator): extract_market_data> on 2026-03-21 19:17:30.503783+00:00
+[2026-03-21T19:17:34.147+0000] {standard_task_runner.py:60} INFO - Started process 133 to run task
+[2026-03-21T19:17:34.150+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'daily_equity_ingestion', 'extract_market_data', 'manual__2026-03-21T19:17:30.503783+00:00', '--job-id', '57', '--raw', '--subdir', 'DAGS_FOLDER/equity_ingestion_dag.py', '--cfg-path', '/tmp/tmpxv42u_i1', '--map-index', '3']
+[2026-03-21T19:17:34.151+0000] {standard_task_runner.py:88} INFO - Job 57: Subtask extract_market_data
+[2026-03-21T19:17:34.183+0000] {task_command.py:423} INFO - Running <TaskInstance: daily_equity_ingestion.extract_market_data manual__2026-03-21T19:17:30.503783+00:00 map_index=3 [running]> on host 4101801a2ad1
+[2026-03-21T19:17:34.240+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='daily_equity_ingestion' AIRFLOW_CTX_TASK_ID='extract_market_data' AIRFLOW_CTX_EXECUTION_DATE='2026-03-21T19:17:30.503783+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-21T19:17:30.503783+00:00'
+[2026-03-21T19:17:34.242+0000] {equity_ingestion_dag.py:37} INFO - Fetching data for INFY.NS...
+[2026-03-21T19:17:34.515+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/peewee.py", line 3306, in execute_sql
+    cursor.execute(sql, params or ())
+sqlite3.IntegrityError: UNIQUE constraint failed: _cookieschema.strategy
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/decorators/base.py", line 241, in execute
+    return_value = super().execute(context)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/equity_ingestion_dag.py", line 39, in extract_market_data
+    info = stock.info
+           ^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/ticker.py", line 159, in info
+    return self.get_info()
+           ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/base.py", line 282, in get_info
+    data = self._quote.info
+           ^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/scrapers/quote.py", line 503, in info
+    self._fetch_info()
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/scrapers/quote.py", line 612, in _fetch_info
+    result = self._fetch(modules=modules)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/scrapers/quote.py", line 588, in _fetch
+    result = self._data.get_raw_json(_QUOTE_SUMMARY_URL_ + f"/{self._symbol}", params=params_dict)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/data.py", line 462, in get_raw_json
+    response = self.get(url, params=params, timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/data.py", line 375, in get
+    response = self._make_request(url, request_method = self._session.get, params=params, timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/data.py", line 409, in _make_request
+    crumb, strategy = self._get_cookie_and_crumb()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/data.py", line 365, in _get_cookie_and_crumb
+    crumb = self._get_cookie_and_crumb_basic(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/data.py", line 244, in _get_cookie_and_crumb_basic
+    if not self._get_cookie_basic(timeout):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/data.py", line 208, in _get_cookie_basic
+    self._save_cookie_curlCffi()
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/utils.py", line 95, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/data.py", line 161, in _save_cookie_curlCffi
+    cache.get_cookie_cache().store('curlCffi', yh_cookie)
+  File "/home/airflow/.local/lib/python3.11/site-packages/yfinance/cache.py", line 403, in store
+    _CookieSchema.insert(strategy=strategy, cookie_bytes=cookie_pkl).execute()
+  File "/home/airflow/.local/lib/python3.11/site-packages/peewee.py", line 2010, in inner
+    return method(self, database, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/peewee.py", line 2081, in execute
+    return self._execute(database)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/peewee.py", line 2886, in _execute
+    return super(Insert, self)._execute(database)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/peewee.py", line 2599, in _execute
+    cursor = database.execute(self)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/peewee.py", line 3312, in execute
+    return self.execute_sql(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/peewee.py", line 3304, in execute_sql
+    with __exception_wrapper__:
+  File "/home/airflow/.local/lib/python3.11/site-packages/peewee.py", line 3076, in __exit__
+    reraise(new_type, new_type(exc_value, *exc_args), traceback)
+  File "/home/airflow/.local/lib/python3.11/site-packages/peewee.py", line 162, in reraise
+    raise value.with_traceback(tb)
+  File "/home/airflow/.local/lib/python3.11/site-packages/peewee.py", line 3306, in execute_sql
+    cursor.execute(sql, params or ())
+peewee.IntegrityError: UNIQUE constraint failed: _cookieschema.strategy
+[2026-03-21T19:17:34.524+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=daily_equity_ingestion, task_id=extract_market_data, map_index=3, execution_date=20260321T191730, start_date=20260321T191734, end_date=20260321T191734
+[2026-03-21T19:17:34.533+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 57 for task extract_market_data (UNIQUE constraint failed: _cookieschema.strategy; 133)
+[2026-03-21T19:17:34.563+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-03-21T19:17:34.576+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

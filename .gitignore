@@ -1,0 +1,18 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Local Knowledge Vault (Don't upload your PDFs/TXTs)
+chub_content/
+raw_uploads/
+
+# OS files
+.DS_Store
+Thumbs.db

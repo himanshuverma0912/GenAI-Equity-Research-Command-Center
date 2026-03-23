@@ -1,0 +1,20 @@
+[2026-03-21T19:28:08.402+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: daily_equity_ingestion.load_to_postgres manual__2026-03-21T19:28:03.930251+00:00 map_index=4 [queued]>
+[2026-03-21T19:28:08.408+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: daily_equity_ingestion.load_to_postgres manual__2026-03-21T19:28:03.930251+00:00 map_index=4 [queued]>
+[2026-03-21T19:28:08.408+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2026-03-21T19:28:08.415+0000] {taskinstance.py:2191} INFO - Executing <Mapped(_PythonDecoratedOperator): load_to_postgres> on 2026-03-21 19:28:03.930251+00:00
+[2026-03-21T19:28:08.421+0000] {standard_task_runner.py:60} INFO - Started process 394 to run task
+[2026-03-21T19:28:08.423+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'daily_equity_ingestion', 'load_to_postgres', 'manual__2026-03-21T19:28:03.930251+00:00', '--job-id', '85', '--raw', '--subdir', 'DAGS_FOLDER/equity_ingestion_dag.py', '--cfg-path', '/tmp/tmp2y_tgcd6', '--map-index', '4']
+[2026-03-21T19:28:08.424+0000] {standard_task_runner.py:88} INFO - Job 85: Subtask load_to_postgres
+[2026-03-21T19:28:08.454+0000] {task_command.py:423} INFO - Running <TaskInstance: daily_equity_ingestion.load_to_postgres manual__2026-03-21T19:28:03.930251+00:00 map_index=4 [running]> on host 4101801a2ad1
+[2026-03-21T19:28:08.505+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='daily_equity_ingestion' AIRFLOW_CTX_TASK_ID='load_to_postgres' AIRFLOW_CTX_EXECUTION_DATE='2026-03-21T19:28:03.930251+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-21T19:28:03.930251+00:00'
+[2026-03-21T19:28:08.511+0000] {base.py:83} INFO - Using connection ID 'finance_db_conn' for task execution.
+[2026-03-21T19:28:08.513+0000] {sql.py:450} INFO - Running statement: 
+            INSERT INTO equity_metrics (ticker, current_price, market_cap, pe_ratio, summary)
+            VALUES (%s, %s, %s, %s, %s);
+        , parameters: ('ICICIBANK.NS', 1245.4, 8915312967680, 17.006691, 'ICICI Bank Limited, together with its subsidiaries, engages in the provision of various banking and financial services to retail and corporate customers in India and internationally. The company operates through Retail Banking, Wholesale Banking, Treasury, Other Banking, Life Insurance, General Insurance, and Others segments. It offers savings, salary, pension, current, trade, escrow, foreign currency, and vostro accounts, as well as time, fixed, recurring, and security deposits. The company als')
+[2026-03-21T19:28:08.514+0000] {sql.py:459} INFO - Rows affected: 1
+[2026-03-21T19:28:08.516+0000] {equity_ingestion_dag.py:106} INFO - Loaded ICICIBANK.NS into Postgres.
+[2026-03-21T19:28:08.516+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-03-21T19:28:08.521+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=daily_equity_ingestion, task_id=load_to_postgres, map_index=4, execution_date=20260321T192803, start_date=20260321T192808, end_date=20260321T192808
+[2026-03-21T19:28:08.555+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-21T19:28:08.564+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
